@@ -6,12 +6,12 @@
     <!-- 정보 리스트 쿼리 -->
     <select id="getMenuList" resultType="HSDT.pos.dto.MenuDTO">
         select menu_name, menu_price
-        from detail_menu
+        from menu_tb
     </select>
 
     <!-- 정보 인서트 쿼리 -->
     <insert id="insertMenu" parameterType="HSDT.pos.dto.MenuDTO">
-        insert into detail_menu
+        insert into menu_tb
         (menu_num,
          menu_name,
          menu_price,
@@ -24,7 +24,7 @@
 
     <!-- 업데이트 쿼리 -->
     <update id="updateMenu" parameterType="HSDT.pos.dto.MenuDTO">
-        update detail_menu
+        update menu_tb
         set menu_name=#{menu_name},
             menu_price=#{menu_price}
         where menu_num=#{menu_num}
@@ -33,7 +33,7 @@
     <!-- 삭제 쿼리 -->
     <delete id="deleteMenu" parameterType="HSDT.pos.dto.MenuDTO">
         delete
-        from detail_menu
+        from menu_tb
         where menu_num = #{menu_num}
     </delete>
 

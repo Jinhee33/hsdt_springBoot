@@ -5,48 +5,40 @@
 
     <!-- 회원가입 (회원정보 등록) -->
     <insert id="InsertManager" parameterType="HSDT.pos.dto.ManagerDTO">
-            INSERT INTO MANAGER
+            INSERT INTO user_tb
                 (
-                 Business_num,
-                 Business_name,
-                 MGR_ID,
-                 MGR_PW,
-                 MGR_Name,
-                 MGR_Tel
+                 id,
+                 pw,
+                 user_name
                 )
             VALUES(
-                   MANAGER_SEQ.nextval,
-                   #{business_name},
                    #{id},
-                   #{password},
-                   #{name},
-                   #{tel}
+                   #{pw},
+                   #{user_name}
                   )
     </insert>
 
     <!-- 로그인 시 아이디 비밀번호 일치 확인 -->
     <select id="getManagerLoginCheck" parameterType="HSDT.pos.dto.ManagerDTO" resultType="HSDT.pos.dto.ManagerDTO">
-        SELECT MGR_ID, business_num, MGR_Name, MGR_Tel, BUSINESS_NAME, MGR_PW
-        FROM MANAGER
-        WHERE MGR_ID = #{id}
-        AND MGR_PW = #{password}
+        SELECT id, pw, user_name
+        FROM user_tb
+        WHERE id = #{id}
+        AND pw = #{pw}
     </select>
 
 
     <!-- 회원탈퇴 -->
     <delete id="deleteManager" parameterType="HSDT.pos.dto.ManagerDTO">
-            DELETE FROM MANAGER
-            WHERE MGR_ID = #{id}
+            DELETE FROM user_tb
+            WHERE id = #{id}
     </delete>
 
     <!-- 회원정보 수정 -->
     <update id="updateManager" parameterType="HSDT.pos.dto.ManagerDTO">
-        UPDATE MANAGER SET
-            BUSINESS_NAME = #{business_name},
-            MGR_Name = #{name},
-            MGR_TEL = #{tel}
+        UPDATE user_tb SET
+            user_name = #{user_name}
         WHERE
-            BUSINESS_NUM = #{business_num}
+            id = #{id}
     </update>
 
 </mapper>

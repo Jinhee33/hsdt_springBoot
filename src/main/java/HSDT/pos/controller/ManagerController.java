@@ -48,24 +48,18 @@ public class ManagerController {
         try {
 
             String id = CmmUtil.nvl(request.getParameter("id"));
-            String password = CmmUtil.nvl(request.getParameter("password"));
-            String name = CmmUtil.nvl(request.getParameter("name"));
-            String tel = CmmUtil.nvl(request.getParameter("tel"));
-            String business_name = CmmUtil.nvl(request.getParameter("business_name"));
+            String pw = CmmUtil.nvl(request.getParameter("pw"));
+            String user_name = CmmUtil.nvl(request.getParameter("user_name"));
 
             log.info("id : " + id);
-            log.info("password : " + password);
-            log.info("name : " + name);
-            log.info("tel : " + tel);
-            log.info("business_name : " + business_name);
+            log.info("pw : " + pw);
+            log.info("user_name : " + user_name);
 
             pDTO = new ManagerDTO();
 
             pDTO.setId(id);
-            pDTO.setPassword(EncryptUtil.encHashSHA256(password));
-            pDTO.setName(name);
-            pDTO.setTel(tel);
-            pDTO.setBusiness_name(business_name);
+            pDTO.setPw(EncryptUtil.encHashSHA256(pw));
+            pDTO.setUser_name(user_name);
 
             //데이터베이스에 회원정보 인서트
             int res = managerService.InsertManager(pDTO);
@@ -112,16 +106,16 @@ public class ManagerController {
         try{
 
             String id = CmmUtil.nvl(request.getParameter("id"));
-            String password = CmmUtil.nvl(request.getParameter("password"));
+            String pw = CmmUtil.nvl(request.getParameter("pw"));
 
 
             log.info("id : " + id);
-            log.info("password : " + password);
+            log.info("pw : " + pw);
 
             ManagerDTO pDTO = new ManagerDTO();
 
             pDTO.setId(id);
-            pDTO.setPassword(EncryptUtil.encHashSHA256(password));
+            pDTO.setPw(EncryptUtil.encHashSHA256(pw));
 
             //로그인정보 체크
             ManagerDTO rDTO = managerService.getManagerLoginCheck(pDTO);
@@ -138,11 +132,8 @@ public class ManagerController {
                 url = "/Main";
 
                 session.setAttribute("SS_ID", rDTO.getId());
-                session.setAttribute("SS_BUSINESS_NUM", rDTO.getBusiness_num());
-                session.setAttribute("SS_TEL", rDTO.getTel());
-                session.setAttribute("SS_BUSINESS_NAME", rDTO.getBusiness_name());
-                session.setAttribute("SS_NAME", rDTO.getName());
-                session.setAttribute("SS_PASSWORD", rDTO.getPassword());
+                session.setAttribute("SS_PW", rDTO.getPw());
+                session.setAttribute("SS_NAME", rDTO.getUser_name());
 
             }
             rDTO = null;
@@ -219,32 +210,24 @@ public class ManagerController {
 
         try {
 
-            String business_num = CmmUtil.nvl(request.getParameter("business_num"));
-            String business_name = CmmUtil.nvl(request.getParameter("business_name"));
-            String name = CmmUtil.nvl(request.getParameter("name"));
-            String tel = CmmUtil.nvl(request.getParameter("tel"));
+            String id = CmmUtil.nvl(request.getParameter("id"));
+            String user_name = CmmUtil.nvl(request.getParameter("user_name"));
 
-            log.info("business_num" + business_num);
-            log.info("business_name" + business_name);
-            log.info("name" + name);
-            log.info("tel" + tel);
+            log.info("id" + id);
+            log.info("user_name" + user_name);
 
             ManagerDTO pDTO = new ManagerDTO();
 
-            pDTO.setBusiness_num(Integer.parseInt(business_num));
-            pDTO.setBusiness_name(business_name);
-            pDTO.setName(name);
-            pDTO.setTel(tel);
-
+            pDTO.setId(id);
+            pDTO.setUser_name(user_name);
 
             managerService.updateManager(pDTO);
 
             msg = "수정되었습니다";
             url = "/mypage";
 
-            session.setAttribute("SS_BUSINESS_NAME", pDTO.getBusiness_name());
-            session.setAttribute("SS_TEL", pDTO.getTel());
-            session.setAttribute("SS_NAME", pDTO.getName());
+            session.setAttribute("SS_BUSINESS_NAME", pDTO.getId());
+            session.setAttribute("SS_TEL", pDTO.getUser_name());
 
         }catch (Exception e){
 

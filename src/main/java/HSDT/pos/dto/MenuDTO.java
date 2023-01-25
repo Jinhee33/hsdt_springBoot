@@ -11,5 +11,4 @@ public class MenuDTO {
     private String menu_name;
     private String menu_price;
     private String category_num;
-    private String sold_out_check;
 }

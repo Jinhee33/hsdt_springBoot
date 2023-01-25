@@ -14,9 +14,9 @@
     <script src="../4_jquery_class/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
         function doRegUserCheck(f) {
-            if (f.name.value === "") {
+            if (f.user_name.value === "") {
                 alert("이름을 입력하세요");
-                f.name.focus();
+                f.user_name.focus();
                 return false;
             }
             if (f.id.value === "") {
@@ -24,21 +24,21 @@
                 f.id.focus();
                 return false;
             }
-            if (f.password.value === "") {
+            if (f.pw.value === "") {
                 alert("비밀번호를 입력하세요");
-                f.password.focus();
+                f.pw.focus();
                 return false;
             }
-            if (f.password2.value === "") {
+            if (f.pw2.value === "") {
                 alert("비밀번호를 확인하세요");
-                f.password2.focus();
+                f.pw2.focus();
                 return false;
             }
         }
 
-        function password() {
-            var p1 = document.getElementById('password').value;
-            var p2 = document.getElementById('password2').value;
+        function pw() {
+            var p1 = document.getElementById('pw').value;
+            var p2 = document.getElementById('pw2').value;
             if (p1 != p2){
                 alert("비밀번호가 일치하지 않습니다");
                 return false;
@@ -55,9 +55,9 @@
                 return false;
             }
 
-            if (f.password.value == ""){
+            if (f.pw.value == ""){
                 alert("비밀번호를 입력하세요");
-                f.password.focus();
+                f.pw.focus();
                 return false;
             }
         }
@@ -111,7 +111,7 @@
                     <h2>LOGIN</h2>
 
                     <input type="text" placeholder="아이디" name="id" id="id"/>
-                    <input type="password" placeholder="비밀번호" name="password" id="password"/>
+                    <input type="password" placeholder="비밀번호" name="pw" id="pw"/>
                     <button type="submit" class="btn_login" formaction="/getManagerLoginCheck" onclick="cambiar_login()">관리자 로그인</button>
 
                 </form>
@@ -122,10 +122,9 @@
 
                     <h2>SIGN UP</h2>
                     <input type="text" placeholder="아이디" name="id"/>
-                    <input type="password" placeholder="비밀번호" name="password" />
-                    <input type="password" placeholder="비밀번호 확인" name="password2" />
-                    <input type="text" placeholder="이름" name="name"/>
-                    <input type="text" placeholder="전화번호" name="tel">
+                    <input type="password" placeholder="비밀번호" name="pw" />
+                    <input type="password" placeholder="비밀번호 확인" name="pw2" />
+                    <input type="text" placeholder="이름" name="user_name"/>
                     <button class="btn_sign_up" onclick="cambiar_sign_up()" type="submit">회원가입 완료</button>
                 </form>
 

@@ -133,7 +133,7 @@
                 <a href="/mypage" class="">내정보</a>
             </li>
             <li style="float:right;">
-                <a href="/cu/Logout">로그아웃</a>
+                <a href="/Logout">로그아웃</a>
             </li>
             <%};%>
         </ul>
