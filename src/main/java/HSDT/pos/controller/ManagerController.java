@@ -129,7 +129,7 @@ public class ManagerController {
 
             }else {
                 msg = "로그인 성공";
-                url = "/Main";
+                url = "/OrderList";
 
                 session.setAttribute("SS_ID", rDTO.getId());
                 session.setAttribute("SS_PW", rDTO.getPw());
@@ -184,7 +184,7 @@ public class ManagerController {
 
         }catch (Exception e){
             msg = "회원탈퇴 실패 : " + e.toString();
-            url = "/Main";
+            url = "/OrderList";
             log.info(e.toString());
             e.printStackTrace();
 
@@ -253,7 +253,7 @@ public class ManagerController {
         log.info(this.getClass().getName() + ".LOGOUT START!!!");
         HttpSession session = request.getSession();
 
-        String url = "/Main";
+        String url = "/OrderList";
         String msg = "로그아웃 성공";
 
         session.invalidate(); // session clear

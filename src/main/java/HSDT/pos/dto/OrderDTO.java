@@ -8,7 +8,7 @@ import lombok.Setter;
 public class OrderDTO {
     private String tableNum;
     private String restaurantFloor;
-    private String orderNum;
+    private String orderListNum;
     private String menuNum;
     private String totalPrice;
     private String totalCount;
