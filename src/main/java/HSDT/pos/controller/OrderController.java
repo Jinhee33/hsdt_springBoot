@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
@@ -36,8 +37,9 @@ public class OrderController {
     }
 
     // 리스트 조회
+    @ResponseBody
     @GetMapping(value = "OrderList")
-    public String OrderList(HttpServletRequest request, ModelMap model) throws Exception{
+    public Object OrderList(HttpServletRequest request, ModelMap model) throws Exception{
 
         log.info(this.getClass().getName() + ".OrderList start!");
 
@@ -52,7 +54,7 @@ public class OrderController {
 
         log.info(this.getClass().getName() + ".OrderList End!");
 
-        return "/order/OrderList";
+        return oList;
     }
 
     //작성할 수 있는 페이지
