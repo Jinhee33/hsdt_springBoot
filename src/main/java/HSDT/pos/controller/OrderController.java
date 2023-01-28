@@ -4,6 +4,7 @@ import HSDT.pos.dto.OrderDTO;
 import HSDT.pos.service.IOrderService;
 import HSDT.pos.util.CmmUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,8 @@ public class OrderController {
         if (oList == null){
             oList = new ArrayList<>();
         }
+        JSONObject jo = new JSONObject();
+        jo.put("asf", oList);
 
         log.info("oList :" + oList);
         model.addAttribute("oList", oList);
