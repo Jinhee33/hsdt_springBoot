@@ -29,31 +29,19 @@ public class OrderController {
     private IOrderService orderService;
     private final static Logger logger= LoggerFactory.getLogger(OrderController.class);
 
-    @GetMapping(value = "testapi")
-    public HashMap<String, String> testapi(HttpServletRequest request, ModelMap model) throws Exception{
-            HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("a","111");
-        hm.put("b","222");
-        return hm;
-    }
-
     // 리스트 조회
+    @GetMapping(value = "OrderList", produces = "application/json")
     @ResponseBody
-    @GetMapping(value = "OrderList")
-    public Object OrderList(HttpServletRequest request, ModelMap model) throws Exception{
+    public List<OrderDTO> OrderList(HttpServletRequest request) throws Exception{
 
         log.info(this.getClass().getName() + ".OrderList start!");
 
         List<OrderDTO> oList = orderService.OrderList();
 
-        if (oList == null){
-            oList = new ArrayList<>();
-        }
-        JSONObject jo = new JSONObject();
-        jo.put("asf", oList);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("orders", oList);
 
         log.info("oList :" + oList);
-        model.addAttribute("oList", oList);
 
         log.info(this.getClass().getName() + ".OrderList End!");
 

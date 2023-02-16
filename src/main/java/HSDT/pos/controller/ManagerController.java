@@ -5,11 +5,10 @@ import HSDT.pos.util.CmmUtil;
 import HSDT.pos.util.EncryptUtil;
 import HSDT.pos.dto.ManagerDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -95,48 +94,53 @@ public class ManagerController {
     }
 
     //--------------로그인 기능-----------------
-    @PostMapping(value = "/getManagerLoginCheck")
-    public String getManagerLoginCheck(HttpSession session, HttpServletResponse response, HttpServletRequest request,
-                                   ModelMap model) throws Exception{
+    @ResponseBody
+    @RequestMapping(value = "/getManagerLoginCheck", method = RequestMethod.POST)
+    public Object getManagerLoginCheck(HttpSession session, HttpServletResponse response, HttpServletRequest request, ManagerDTO pDTO, ModelMap model) throws Exception{
+
         log.info(this.getClass().getName() + ".getManagerLoginCheck START!!!");
 
         String msg = "";
         String url = "";
 
         try{
-
             String id = CmmUtil.nvl(request.getParameter("id"));
             String pw = CmmUtil.nvl(request.getParameter("pw"));
-
 
             log.info("id : " + id);
             log.info("pw : " + pw);
 
-            ManagerDTO pDTO = new ManagerDTO();
+            pDTO = new ManagerDTO();
 
             pDTO.setId(id);
             pDTO.setPw(EncryptUtil.encHashSHA256(pw));
 
+            //log.info("qqq" + managerService.getManagerLoginCheck(pDTO));
+
             //로그인정보 체크
-            ManagerDTO rDTO = managerService.getManagerLoginCheck(pDTO);
+            //ManagerDTO rDTO = managerService.getManagerLoginCheck(pDTO);
 
-            log.info("rDTO:" + rDTO);
+            log.info("pDTO:" + pDTO);
+            //log.info("rDTO:" + rDTO);
 
-            if (rDTO == null){
-                rDTO = new ManagerDTO();
+            if (pDTO == null){
+                pDTO = new ManagerDTO();
                 msg = "아이디 / 비밀번호를 확인해주세요";
                 url = "managerLoginForm";
+                log.info("아이디 / 비밀번호를 확인해주세요");
 
             }else {
                 msg = "로그인 성공";
                 url = "/OrderList";
+                log.info("로그인 성공");
 
-                session.setAttribute("SS_ID", rDTO.getId());
-                session.setAttribute("SS_PW", rDTO.getPw());
-                session.setAttribute("SS_NAME", rDTO.getUser_name());
+                session.setAttribute("SS_ID", pDTO.getId());
+                session.setAttribute("SS_PW", pDTO.getPw());
+                session.setAttribute("SS_NAME", pDTO.getUser_name());
 
+                return pDTO;
             }
-            rDTO = null;
+            pDTO = null;
 
         }catch (Exception e){
             msg = "실패하였습니다 :" + e.toString();
@@ -151,10 +155,55 @@ public class ManagerController {
             model.addAttribute("url", url);
         }
 
-        return "/redirect";
+        return pDTO;
     }
 
+    /*{
+        log.info(this.getClass().getName() + ".getManagerLoginCheck START!!!");
 
+        String msg = "";
+        String url = "";
+
+        log.info("recevied:  " + qDto.toString());
+        try {
+            String id = CmmUtil.nvl(qDto.getId());
+            String pw = CmmUtil.nvl(qDto.getPw());
+
+            log.info("id : " + id);
+            log.info("pw : " + pw);
+
+            qDto = new ManagerDTO();
+
+            qDto.setId(id);
+            qDto.setPw(EncryptUtil.encHashSHA256(pw));
+
+            log.info("qDTO.getId:" + qDto.getId());
+            log.info("qDTO.getPw:" + qDto.getPw());
+            log.info("qqq" + managerService.getManagerLoginCheck(qDto));
+
+            //로그인정보 체크
+
+            // ManagerDTO dbDTO = managerService.getManagerLoginCheck(qDto);
+            //log.info("qDTO:" + qDto);
+
+            if (qDto == null) {
+                rDTO = new ManagerDTO();
+                msg = "아이디 / 비밀번호를 확인해주세요";
+                url = "managerLoginForm";
+                log.info("아이디 / 비밀번호를 확인해주세요");
+
+            } else {
+                msg = "로그인 성공";
+                url = "/OrderList";
+                log.info("로그인 성공");
+
+                session.setAttribute("SS_ID", qDto.getId());
+                session.setAttribute("SS_PW", qDto.getPw());
+                session.setAttribute("SS_NAME", qDto.getUser_name());
+
+            }
+            rDTO = null;
+        }*/
     //------회원탈퇴 (회원정보 삭제)------------
     @GetMapping(value = "/deleteManager")
     public String deleteManager(HttpSession session, HttpServletResponse response,HttpServletRequest request, ModelMap model) {

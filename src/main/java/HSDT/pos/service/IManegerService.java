@@ -7,7 +7,6 @@ public interface IManegerService {
     //회원가입 하기
     int InsertManager(ManagerDTO pDTO) throws Exception;
 
-
     //로그인 시 아이디 비밀번호 일치하는지 확인하기
     ManagerDTO getManagerLoginCheck(ManagerDTO pDTO) throws Exception;
 
