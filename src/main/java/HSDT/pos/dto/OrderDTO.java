@@ -3,6 +3,8 @@ package HSDT.pos.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Base64;
+
 @Getter
 @Setter
 public class OrderDTO {
@@ -18,4 +20,6 @@ public class OrderDTO {
     private String menuPrice;
     private String categoryNum;
     private String categoryName;
+    private byte[] file;
+
 }

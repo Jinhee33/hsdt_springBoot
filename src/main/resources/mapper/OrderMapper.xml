@@ -5,11 +5,19 @@
 
     <!-- 게시글 리스트 쿼리 -->
     <select id="OrderList" parameterType="HSDT.pos.dto.OrderDTO" resultType="HashMap">
-        select r.table_num, m.menu_name, m.menu_price
+        select m.menu_name, m.menu_price
+        from category_tb c, menu_tb m
+        where c.category_num = m.category_num
+    </select>
+
+    <!-- 주문내역 쿼리 -->
+    <select id="OrderList2" parameterType="HSDT.pos.dto.OrderDTO" resultType="HashMap">
+        select menu_name, menu_price
         from restaurant_tb r, orderList_tb o, menu_tb m
         where r.table_num = o.table_num and o.menu_num = m.menu_num
         order by rownum desc
     </select>
+
 
     <!--게시판 게시물 등록 쿼리 -->
     <insert id="insertOrder" parameterType="HSDT.pos.dto.OrderDTO">

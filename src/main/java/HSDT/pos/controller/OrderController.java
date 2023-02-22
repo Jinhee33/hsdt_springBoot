@@ -38,9 +38,6 @@ public class OrderController {
 
         List<OrderDTO> oList = orderService.OrderList();
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("orders", oList);
-
         log.info("oList :" + oList);
 
         log.info(this.getClass().getName() + ".OrderList End!");
