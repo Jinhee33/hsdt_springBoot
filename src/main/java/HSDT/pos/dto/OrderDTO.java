@@ -20,6 +20,6 @@ public class OrderDTO {
     private String menuPrice;
     private String categoryNum;
     private String categoryName;
-    private byte[] file;
+    private String imgAddress;
 
 }

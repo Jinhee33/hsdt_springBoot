@@ -9,6 +9,7 @@ import java.util.List;
 public interface IOrderMapper {
 
     List<OrderDTO> OrderList() throws Exception;
+    List<OrderDTO> OrderList2() throws Exception;
     //게시글 insert
     void insertOrder(OrderDTO oDTO) throws Exception;
     //게시글 상세내용 조회

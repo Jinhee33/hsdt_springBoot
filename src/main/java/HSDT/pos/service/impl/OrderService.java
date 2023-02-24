@@ -27,6 +27,11 @@ public class OrderService implements IOrderService {
         return orderMapper.OrderList();
     }
 
+    @Override
+    public List<OrderDTO> OrderList2() throws Exception{
+        return orderMapper.OrderList2();
+    }
+
     // 작성
     @Transactional
     @Override
